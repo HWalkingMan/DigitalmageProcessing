@@ -29,4 +29,11 @@ public class MatUtilTest {
     mat.put(1,2,new double[]{20});
     MatUtil.showMat(mat);
   }
+
+  @Test
+  public void test(){
+    String s="";
+
+    Double d= Double.valueOf(s);
+  }
 }

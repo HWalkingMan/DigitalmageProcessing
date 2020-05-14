@@ -1,7 +1,5 @@
 package org.csu.utils;
 
-import static org.junit.Assert.*;
-
 import java.io.File;
 import org.junit.Test;
 
@@ -17,8 +15,14 @@ public class PathUtilTest {
   }
 
   @Test
-  public void testOutputFilePath() {
+  public void testOutputTempFilePath() {
     File file=new File("I://new.jpg");
-    System.out.println(PathUtil.outputFilePath(file,"txczyzh"));
+    System.out.println(PathUtil.outputTempFilePath(file,"txczyzh"));
+  }
+
+  @Test
+  public void testOutputFilePath() {
+    File file=new File("I://new-zoom.jpg");
+    System.out.println(PathUtil.outputFilePath(file));
   }
 }

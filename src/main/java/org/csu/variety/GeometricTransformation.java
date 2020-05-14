@@ -3,7 +3,6 @@ package org.csu.variety;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import org.csu.utils.MatUtil;
 import org.csu.utils.PathUtil;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -27,7 +26,7 @@ public class GeometricTransformation {
    * @param  file 输入文件
    * @return 结果路径
    */
-  public static String pan(File file) throws Exception {
+  public static String spin(File file) throws Exception {
     Mat src = Imgcodecs.imread(file.getAbsolutePath());
 
     if (src.empty()) {
@@ -49,14 +48,14 @@ public class GeometricTransformation {
     //dst :  输出的图像
     //affineTrans : 变换矩阵。
     //dsize : 输出图象的大小
-    String outputFilePath = PathUtil.outputFilePath(file, "pan");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "pan");
     Imgproc.warpAffine(src, dst, affineTrans, dst.size(), Imgproc.INTER_NEAREST);
     Imgcodecs.imwrite(outputFilePath,dst);
 
     return outputFilePath;
   }
 
-  public static String pan(File file,double angle,double scale ) throws Exception {
+  public static String spin(File file,double angle,double scale) throws Exception {
     Mat src = Imgcodecs.imread(file.getAbsolutePath());
 
     if (src.empty()) {
@@ -75,14 +74,14 @@ public class GeometricTransformation {
     //dst :  输出的图像
     //affineTrans : 变换矩阵。
     //dsize : 输出图象的大小
-    String outputFilePath = PathUtil.outputFilePath(file, "pan");
-    Imgproc.warpAffine(src, dst, affineTrans, dst.size(), Imgproc.INTER_NEAREST);
+    String outputFilePath = PathUtil.outputTempFilePath(file, "pan");
+    Imgproc.warpAffine(src, dst, affineTrans, dst.size(), Imgproc.INTER_LINEAR);
     Imgcodecs.imwrite(outputFilePath,dst);
 
     return outputFilePath;
   }
 
-  public static String pan(File file,double centerX,double centerY,double angle,double scale ) throws Exception {
+  public static String spin(File file,double centerX,double centerY,double angle,double scale ) throws Exception {
     Mat src = Imgcodecs.imread(file.getAbsolutePath());
 
     if (src.empty()) {
@@ -93,7 +92,7 @@ public class GeometricTransformation {
 
     Mat affineTrans = Imgproc.getRotationMatrix2D(center, angle, scale);
 
-    String outputFilePath = PathUtil.outputFilePath(file, "pan");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "pan");
     Imgproc.warpAffine(src, dst, affineTrans, dst.size(), Imgproc.INTER_NEAREST);
     Imgcodecs.imwrite(outputFilePath,dst);
 
@@ -120,7 +119,7 @@ public class GeometricTransformation {
     float width = src.width();
     int height = src.height();
 
-    String outputFilePath = PathUtil.outputFilePath(file, "zoom");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "zoom");
 
     Imgproc.resize(src,dst,new Size(width*scale,height*scale));
 
@@ -141,7 +140,7 @@ public class GeometricTransformation {
     float width = src.width();
     int height = src.height();
 
-    String outputFilePath = PathUtil.outputFilePath(file, "zoom");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "zoom");
 
     Imgproc.resize(src,dst,new Size(width*scale,height*scale));
 
@@ -160,7 +159,7 @@ public class GeometricTransformation {
 
     Mat dst = src.clone();
 
-    String outputFilePath = PathUtil.outputFilePath(file, "zoom");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "zoom");
 
     Imgproc.resize(src,dst,new Size(width,height));
 
@@ -169,7 +168,7 @@ public class GeometricTransformation {
     return outputFilePath;
   }
 
-  public static String spin(File file) throws Exception {
+  public static String pan(File file) throws Exception {
     Mat src=Imgcodecs.imread(file.getAbsolutePath());
     if (src.empty()) {
       throw new Exception("加载图片失败！");
@@ -182,13 +181,13 @@ public class GeometricTransformation {
     affineTrans.put(1,1,new double[]{1});
     affineTrans.put(1,2,new double[]{20});//垂直偏移量
 
-    String outputFilePath = PathUtil.outputFilePath(file, "spin");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "spin");
     Imgproc.warpAffine(src,dst,affineTrans,dst.size());
     Imgcodecs.imwrite(outputFilePath,dst);
     return outputFilePath;
   }
 
-  public static String spin(File file,double xoff,double yoff) throws Exception {
+  public static String pan(File file,double xoff,double yoff) throws Exception {
     Mat src=Imgcodecs.imread(file.getAbsolutePath());
     if (src.empty()) {
       throw new Exception("加载图片失败！");
@@ -201,7 +200,7 @@ public class GeometricTransformation {
     affineTrans.put(1,1,new double[]{1});
     affineTrans.put(1,2,new double[]{yoff});//垂直偏移量
 
-    String outputFilePath = PathUtil.outputFilePath(file, "spin");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "spin");
     Imgproc.warpAffine(src,dst,affineTrans,dst.size());
     Imgcodecs.imwrite(outputFilePath,dst);
     return outputFilePath;
@@ -261,8 +260,7 @@ public class GeometricTransformation {
 
     Core.normalize(temp, temp, 0, 255, Core.NORM_MINMAX);
 
-
-    String outputFilePath = PathUtil.outputFilePath(file, "fourierTransform");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "fourierTransform");
     Imgcodecs.imwrite(outputFilePath,temp);
 
     return outputFilePath;

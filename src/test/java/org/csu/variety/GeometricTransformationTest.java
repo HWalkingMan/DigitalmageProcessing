@@ -18,9 +18,9 @@ public class GeometricTransformationTest {
 
   @Test
   public void pan() {
-    File file=new File("src/main/resources/inputImg/1568700218300.jpeg");
+    File file=new File("src/main/resources/inputImg/test.bmp");
     try {
-      GeometricTransformation.pan(file);
+      GeometricTransformation.pan(file,45,1.0);
     }
     catch (Exception e) {
       e.printStackTrace();
