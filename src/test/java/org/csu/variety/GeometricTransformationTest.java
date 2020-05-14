@@ -37,4 +37,26 @@ public class GeometricTransformationTest {
       e.printStackTrace();
     }
   }
+
+  @Test
+  public void spin(){
+    File file=new File("src/main/resources/inputImg/test.bmp");
+    try {
+      GeometricTransformation.spin(file,100,100);
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @Test
+  public void fourierTransform(){
+    File file=new File("src/main/resources/inputImg/test2.bmp");
+    try {
+      GeometricTransformation.fourierTransform(file);
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }

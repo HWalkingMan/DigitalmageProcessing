@@ -1,8 +1,12 @@
 package org.csu.variety;
 
 import java.io.File;
+import java.util.Arrays;
 import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfDouble;
+import org.opencv.core.Size;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
@@ -50,6 +54,19 @@ public class TrySomething {
       HighGui.imshow("d",dst);
       HighGui.waitKey(1000);
 
+  }
+
+  public static void playMat(){
+    Mat mat=Mat.zeros(new Size(3,6), CvType.CV_32FC4);
+//    for (int i=0;i<mat.height();i++){
+//
+//      for (int j=0;j<mat.width();j++){
+//        System.out.print(Arrays.toString(mat.get(i, j)) +"\t");
+//      }
+//      System.out.println();
+//    }
+
+    System.out.println(mat.channels());
   }
 
 }
