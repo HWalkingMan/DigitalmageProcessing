@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -13,6 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -54,6 +57,23 @@ public class MainController implements Initializable {
   public Button btn_go;
   public Label la_inputSize;
   public Label la_outputSize;
+  public Button btn_clear;
+  public Slider sl_para5;
+  public Slider sl_para6;
+  public Label la_para5;
+  public Label la_para6;
+  public Button btn_autoHistEqualize;
+  public Button btn_histEqualize;
+  public Button btn_laplaceEnhance;
+  public Button btn_logEnhance;
+  public Button btn_gammaEnhance;
+  public Button btn_laplacianSmooth;
+  public Button btn_medianFiltering;
+  public Button btn_gaussianBlur;
+  public Button btn_canny;
+  public Button btn_sobel;
+  public Label la_para5v;
+  public Label la_para6v;
 
   private File file;
 
@@ -62,6 +82,30 @@ public class MainController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     service=new ProcessService(this);
+    sl_para5.setMajorTickUnit(127);
+    sl_para5.setMinorTickCount(8);
+    sl_para5.setShowTickLabels(true);
+    sl_para5.setShowTickMarks(true);
+    sl_para5.setBlockIncrement(16);
+    sl_para5.valueProperty().addListener(new ChangeListener<Number>() {
+      @Override
+      public void changed(ObservableValue<? extends Number> observable, Number oldValue,
+          Number newValue) {
+        la_para5v.setText(String.format("%.1f", newValue));
+      }
+    });
+    sl_para6.setMajorTickUnit(127);
+    sl_para6.setMinorTickCount(8);
+    sl_para6.setShowTickLabels(true);
+    sl_para6.setShowTickMarks(true);
+    sl_para6.setBlockIncrement(16);
+    sl_para6.valueProperty().addListener(new ChangeListener<Number>() {
+      @Override
+      public void changed(ObservableValue<? extends Number> observable, Number oldValue,
+          Number newValue) {
+        la_para6v.setText(String.format("%.1f", newValue));
+      }
+    });
   }
 
   public void btn_openClick(ActionEvent actionEvent) {
@@ -78,7 +122,7 @@ public class MainController implements Initializable {
 
     FileChooser chooser = new FileChooser(); // 创建一个文件对话框
     chooser.setTitle("打开文件"); // 设置文件对话框的标题
-    chooser.setInitialDirectory(new File("I:\\")); // 设置文件对话框的初始目录
+    chooser.setInitialDirectory(new File("G:\\")); // 设置文件对话框的初始目录
 
     // 给文件对话框添加多个文件类型的过滤器
     chooser.getExtensionFilters().addAll(
@@ -139,6 +183,12 @@ public class MainController implements Initializable {
     la_para3.setVisible(false);
     ed_para4.setVisible(false);
     la_para4.setVisible(false);
+    sl_para5.setVisible(false);
+    la_para5.setVisible(false);
+    sl_para6.setVisible(false);
+    la_para6.setVisible(false);
+    la_para5v.setVisible(false);
+    la_para6v.setVisible(false);
   }
 
   private void usableBtn(){
@@ -148,6 +198,16 @@ public class MainController implements Initializable {
     btn_zoom.setDisable(false);
     btn_fourierTransform.setDisable(false);
     btn_txzjyzh.setDisable(false);
+    btn_autoHistEqualize.setDisable(false);
+    btn_histEqualize.setDisable(false);
+    btn_laplaceEnhance.setDisable(false);
+    btn_logEnhance.setDisable(false);
+    btn_gammaEnhance.setDisable(false);
+    btn_laplacianSmooth.setDisable(false);
+    btn_medianFiltering.setDisable(false);
+    btn_gaussianBlur.setDisable(false);
+    btn_canny.setDisable(false);
+    btn_sobel.setDisable(false);
   }
 
   private String type="";
@@ -194,8 +254,60 @@ public class MainController implements Initializable {
       }
       resetParas();
     }
+    else if (type.equals("gammaEnhance")){
+      try {
+        double r= Double.parseDouble(ed_para1.getText());
+        service.gammaEnhance(r);
+      }
+      catch (Exception e){
+        e.printStackTrace();
+        this.addNewLog(e.getMessage());
+        this.addNewLog("输入格式错误,请重新输入");
+      }
+      resetParas();
+    }
+    else if (type.equals("medianFiltering")){
+      try {
+        int kernelLegth= Integer.parseInt(ed_para1.getText());
+        service.medianFiltering(kernelLegth);
+      }
+      catch (Exception e){
+        e.printStackTrace();
+        this.addNewLog(e.getMessage());
+        this.addNewLog("输入格式错误,请重新输入");
+      }
+      resetParas();
+    }
+    else if (type.equals("gaussianBlur")){
+      try {
+        double r= Double.parseDouble(ed_para1.getText());
+        service.gaussianBlur(r);
+      }
+      catch (Exception e){
+        e.printStackTrace();
+        this.addNewLog(e.getMessage());
+        this.addNewLog("输入格式错误,请重新输入");
+      }
+      resetParas();
+    }
+    else if (type.equals("canny")){
+      try {
+        double t1= sl_para5.getValue();
+        double t2=sl_para6.getValue();
+        service.canny(t1,t2);
+      }
+      catch (Exception e){
+        e.printStackTrace();
+        this.addNewLog(e.getMessage());
+        this.addNewLog("输入格式错误,请重新输入");
+      }
+      resetParas();
+    }
     else if (type.isEmpty()){
       this.addNewLog("无可用操作");
+    }
+    else {
+      this.addNewLog("操作异常");
     }
   }
 
@@ -249,5 +361,88 @@ public class MainController implements Initializable {
   public void btn_txzjyzhClick(ActionEvent actionEvent) {
     resetParas();
     service.txzjyzh();
+  }
+
+
+
+  public void btn_autoHistEqualizeClick(ActionEvent actionEvent) {
+    resetParas();
+    service.autoHistEqualize();
+  }
+
+  public void btn_histEqualizeClick(ActionEvent actionEvent) {
+    resetParas();
+    service.histEqualize();
+  }
+
+  public void btn_laplaceEnhanceClick(ActionEvent actionEvent) {
+    resetParas();
+    service.laplaceEnhance();
+  }
+
+  public void btn_logEnhanceClick(ActionEvent actionEvent) {
+    resetParas();
+    service.logEnhance();
+  }
+
+  public void btn_gammaEnhanceClick(ActionEvent actionEvent) {
+    resetParas();
+    type="gammaEnhance";
+    la_para1.setText("γ");
+    la_para1.setVisible(true);
+    ed_para1.setVisible(true);
+    btn_go.setVisible(true);
+  }
+
+  public void btn_laplacianSmoothClick(ActionEvent actionEvent) {
+    resetParas();
+    service.laplacianSmooth();
+  }
+
+  public void btn_medianFilteringClick(ActionEvent actionEvent) {
+    resetParas();
+    type="medianFiltering";
+    la_para1.setText("kernelLegth");
+    la_para1.setVisible(true);
+    ed_para1.setVisible(true);
+    btn_go.setVisible(true);
+  }
+
+  public void btn_gaussianBlurClick(ActionEvent actionEvent) {
+    resetParas();
+    type="gaussianBlur";
+    la_para1.setText("sigmaX");
+    la_para1.setVisible(true);
+    ed_para1.setVisible(true);
+    btn_go.setVisible(true);
+  }
+
+  public void btn_cannyClick(ActionEvent actionEvent) {
+    resetParas();
+    type="canny";
+    la_para5.setText("阈值1 范围（0-255）");
+    sl_para5.setMin(0);
+    sl_para5.setMax(255);
+    sl_para6.setMin(0);
+    sl_para6.setMax(255);
+    sl_para5.setValue(40);
+    la_para5.setVisible(true);
+    sl_para5.setVisible(true);
+    la_para6.setText("阈值2 范围（0-255）");
+    sl_para6.setValue(200);
+    la_para6.setVisible(true);
+    sl_para6.setVisible(true);
+    btn_go.setVisible(true);
+    la_para5v.setVisible(true);
+    la_para6v.setVisible(true);
+  }
+
+  public void btn_sobelClick(ActionEvent actionEvent) {
+    resetParas();
+    service.sobel();
+  }
+
+  public void btn_clearClick(ActionEvent actionEvent) {
+    txa_output.clear();
   }
 }

@@ -51,7 +51,7 @@ public class GeometricTransformationTest {
 
   @Test
   public void fourierTransform(){
-    File file=new File("src/main/resources/inputImg/test2.bmp");
+    File file=new File("I://m.png");
     try {
       GeometricTransformation.fourierTransform(file);
     }

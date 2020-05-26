@@ -12,7 +12,7 @@
 <AnchorPane fx:id="rootLayout" prefHeight="760.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.csu.controller.MainController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="737.0" layoutX="14.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="89.0" layoutX="256.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="806.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="102.0" layoutX="256.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="806.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000008" height="434.0" layoutX="256.0" layoutY="122.0" stroke="BLACK" strokeType="INSIDE" width="806.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="187.0" layoutX="256.0" layoutY="566.0" stroke="BLACK" strokeType="INSIDE" width="806.0" />
       <Label layoutX="24.0" layoutY="24.0" text="操作列表">
@@ -41,24 +41,41 @@
       <ImageView fx:id="img_output" fitHeight="370.0" fitWidth="370.0" layoutX="672.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true" />
       <TextArea fx:id="txa_output" editable="false" layoutX="268.0" layoutY="603.0" prefHeight="133.0" prefWidth="770.0" />
       <Button fx:id="btn_open" layoutX="35.0" layoutY="59.0" mnemonicParsing="false" onAction="#btn_openClick" text="打开图像" />
-      <Button fx:id="btn_output" disable="true" layoutX="35.0" layoutY="107.0" mnemonicParsing="false" onAction="#btn_outputClick" text="输出图像" />
-      <Button fx:id="btn_txzjyzh" disable="true" layoutX="35.0" layoutY="156.0" mnemonicParsing="false" onAction="#btn_txzjyzhClick" text=" 图像直接阈值化操作" />
-      <Button fx:id="btn_pan" disable="true" layoutX="35.0" layoutY="204.0" mnemonicParsing="false" onAction="#btn_panClick" text="平移" />
-      <Button fx:id="btn_spin" disable="true" layoutX="102.0" layoutY="204.0" mnemonicParsing="false" onAction="#btn_spinClick" text="旋转" />
-      <Button fx:id="btn_zoom" disable="true" layoutX="170.0" layoutY="204.0" mnemonicParsing="false" onAction="#btn_zoomClick" text="缩放" />
-      <Button fx:id="btn_fourierTransform" disable="true" layoutX="35.0" layoutY="248.0" mnemonicParsing="false" onAction="#btn_fourierTransformClick" text="傅里叶变换" />
-      <Label fx:id="la_para1" layoutX="373.0" layoutY="38.0" text="参数1" visible="false" />
-      <TextField fx:id="ed_para1" layoutX="373.0" layoutY="59.0" prefHeight="30.0" prefWidth="102.0" visible="false" />
-      <TextField fx:id="ed_para2" layoutX="540.0" layoutY="59.0" prefHeight="30.0" prefWidth="102.0" visible="false" />
-      <Label fx:id="la_para2" layoutX="540.0" layoutY="38.0" text="参数2" visible="false" />
-      <TextField fx:id="ed_para3" layoutX="691.0" layoutY="59.0" prefHeight="30.0" prefWidth="102.0" visible="false" />
-      <Label fx:id="la_para3" layoutX="691.0" layoutY="38.0" text="参数3" visible="false" />
-      <TextField fx:id="ed_para4" layoutX="842.0" layoutY="59.0" prefHeight="30.0" prefWidth="102.0" visible="false" />
-      <Label fx:id="la_para4" layoutX="842.0" layoutY="38.0" text="参数4" visible="false" />
-      <Button fx:id="btn_go" layoutX="992.0" layoutY="48.0" mnemonicParsing="false" onAction="#btn_goClick" prefHeight="40.0" prefWidth="50.0" text="GO" visible="false" />
+      <Button fx:id="btn_output" disable="true" layoutX="155.0" layoutY="59.0" mnemonicParsing="false" onAction="#btn_outputClick" text="输出图像" />
+      <Button fx:id="btn_txzjyzh" disable="true" layoutX="35.0" layoutY="105.0" mnemonicParsing="false" onAction="#btn_txzjyzhClick" text=" 图像直接阈值化操作" />
+      <Button fx:id="btn_pan" disable="true" layoutX="35.0" layoutY="153.0" mnemonicParsing="false" onAction="#btn_panClick" text="平移" />
+      <Button fx:id="btn_spin" disable="true" layoutX="102.0" layoutY="153.0" mnemonicParsing="false" onAction="#btn_spinClick" text="旋转" />
+      <Button fx:id="btn_zoom" disable="true" layoutX="170.0" layoutY="153.0" mnemonicParsing="false" onAction="#btn_zoomClick" text="缩放" />
+      <Button fx:id="btn_fourierTransform" disable="true" layoutX="35.0" layoutY="189.0" mnemonicParsing="false" onAction="#btn_fourierTransformClick" text="傅里叶变换" />
+      <Label fx:id="la_para1" layoutX="359.0" layoutY="38.0" text="参数1" visible="false" />
+      <TextField fx:id="ed_para1" layoutX="359.0" layoutY="59.0" prefHeight="30.0" prefWidth="102.0" visible="false" />
+      <TextField fx:id="ed_para2" layoutX="499.0" layoutY="59.0" prefHeight="30.0" prefWidth="102.0" visible="false" />
+      <Label fx:id="la_para2" layoutX="499.0" layoutY="38.0" text="参数2" visible="false" />
+      <TextField fx:id="ed_para3" layoutX="639.0" layoutY="59.0" prefHeight="30.0" prefWidth="102.0" visible="false" />
+      <Label fx:id="la_para3" layoutX="639.0" layoutY="38.0" text="参数3" visible="false" />
+      <TextField fx:id="ed_para4" layoutX="785.0" layoutY="59.0" prefHeight="30.0" prefWidth="102.0" visible="false" />
+      <Label fx:id="la_para4" layoutX="785.0" layoutY="38.0" text="参数4" visible="false" />
+      <Button fx:id="btn_go" layoutX="970.0" layoutY="31.0" mnemonicParsing="false" onAction="#btn_goClick" prefHeight="65.0" prefWidth="67.0" style="-fx-background-color: #008B45;" text="GO" textFill="WHITE" visible="false" />
       <Label layoutX="450.0" layoutY="528.0" text="input" />
       <Label layoutX="837.0" layoutY="528.0" text="output" />
       <Label fx:id="la_inputSize" layoutX="586.0" layoutY="134.0" text="inputSize" />
       <Label fx:id="la_outputSize" layoutX="964.0" layoutY="134.0" text="outputSize" />
+      <Button fx:id="btn_clear" layoutX="958.0" layoutY="573.0" mnemonicParsing="false" onAction="#btn_clearClick" prefHeight="7.0" prefWidth="72.0" text="clear" />
+      <Button fx:id="btn_autoHistEqualize" disable="true" layoutX="35.0" layoutY="243.0" mnemonicParsing="false" onAction="#btn_autoHistEqualizeClick" prefHeight="30.0" prefWidth="110.0" text="直方图均值化" />
+      <Button fx:id="btn_histEqualize" disable="true" layoutX="35.0" layoutY="279.0" mnemonicParsing="false" onAction="#btn_histEqualizeClick" prefHeight="30.0" prefWidth="110.0" text="直方图增强" />
+      <Button fx:id="btn_laplaceEnhance" disable="true" layoutX="35.0" layoutY="314.0" mnemonicParsing="false" onAction="#btn_laplaceEnhanceClick" text="拉普拉斯算子增强" />
+      <Button fx:id="btn_logEnhance" disable="true" layoutX="35.0" layoutY="352.0" mnemonicParsing="false" onAction="#btn_logEnhanceClick" text="对数变换" />
+      <Button fx:id="btn_gammaEnhance" disable="true" layoutX="129.0" layoutY="352.0" mnemonicParsing="false" onAction="#btn_gammaEnhanceClick" text="伽马变换" />
+      <Button fx:id="btn_laplacianSmooth" disable="true" layoutX="35.0" layoutY="403.0" mnemonicParsing="false" onAction="#btn_laplacianSmoothClick" text="拉普拉斯平滑" />
+      <Button fx:id="btn_medianFiltering" disable="true" layoutX="35.0" layoutY="440.0" mnemonicParsing="false" onAction="#btn_medianFilteringClick" text="均值平滑" />
+      <Button fx:id="btn_gaussianBlur" disable="true" layoutX="35.0" layoutY="486.0" mnemonicParsing="false" onAction="#btn_gaussianBlurClick" text="高斯模糊" />
+      <Button fx:id="btn_canny" disable="true" layoutX="35.0" layoutY="541.0" mnemonicParsing="false" onAction="#btn_cannyClick" text="Canny" />
+      <Button fx:id="btn_sobel" disable="true" layoutX="140.0" layoutY="541.0" mnemonicParsing="false" onAction="#btn_sobelClick" text="Sobel" />
+      <Slider fx:id="sl_para5" layoutX="359.0" layoutY="74.0" max="255.0" prefHeight="18.0" prefWidth="220.0" visible="false" />
+      <Slider fx:id="sl_para6" layoutX="714.0" layoutY="74.0" max="255.0" prefHeight="18.0" prefWidth="220.0" visible="false" />
+      <Label fx:id="la_para5" layoutX="308.0" layoutY="48.0" text="参数5" visible="false" />
+      <Label fx:id="la_para6" layoutX="653.0" layoutY="48.0" text="参数6" visible="false" />
+      <Label fx:id="la_para5v" layoutX="307.0" layoutY="73.0" text="value" visible="false" />
+      <Label fx:id="la_para6v" layoutX="653.0" layoutY="73.0" text="value" visible="false" />
    </children>
 </AnchorPane>
