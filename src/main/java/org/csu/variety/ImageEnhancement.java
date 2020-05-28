@@ -92,7 +92,7 @@ public class ImageEnhancement {
     float[] kernel = {0, 0, 0, -1, 5f, -1, 0, 0, 0};
     Mat kernelMat = new Mat(3, 3, CvType.CV_32FC1);
     kernelMat.put(0, 0, kernel);
-    Imgproc.filter2D(dst, dst, CvType.CV_8UC3, kernelMat);
+    Imgproc.filter2D(src, dst, CvType.CV_8UC3, kernelMat);
 
 
     String outputFilePath = PathUtil.outputTempFilePath(file, "laplaceEnhance");
@@ -147,7 +147,7 @@ public class ImageEnhancement {
     Core.normalize(dst, dst, 0, 255, Core.NORM_MINMAX);
     Core.convertScaleAbs(dst, dst);
 
-    String outputFilePath = PathUtil.outputTempFilePath(file, "gammaEnhance2");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "gammaEnhance");
     Imgcodecs.imwrite(outputFilePath,dst);
 
     return outputFilePath;
@@ -167,7 +167,7 @@ public class ImageEnhancement {
     Core.normalize(dst, dst, 0, 255, Core.NORM_MINMAX);
     Core.convertScaleAbs(dst, dst);
 
-    String outputFilePath = PathUtil.outputTempFilePath(file, "gammaEnhance2");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "gammaEnhance");
     Imgcodecs.imwrite(outputFilePath,dst);
 
     return outputFilePath;
@@ -214,7 +214,7 @@ public class ImageEnhancement {
       Imgproc.medianBlur(src,dst,i);
     }
 
-    String outputFilePath = PathUtil.outputTempFilePath(file, "medianFiltering3-2");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "medianFiltering");
     Imgcodecs.imwrite(outputFilePath,dst);
 
     return outputFilePath;
@@ -233,7 +233,7 @@ public class ImageEnhancement {
       Imgproc.medianBlur(src,dst,i);
     }
 
-    String outputFilePath = PathUtil.outputTempFilePath(file, "medianFiltering3-2");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "medianFiltering");
     Imgcodecs.imwrite(outputFilePath,dst);
 
     return outputFilePath;
@@ -241,7 +241,25 @@ public class ImageEnhancement {
 
   //-------------图像锐化----------------------------------------
 
-
+  /**
+   * 图像锐化
+   * @param  file 输入文件
+   * @return 结果路径
+   */
+  public static String sharpening(File file) throws Exception {
+    Mat src = Imgcodecs.imread(file.getAbsolutePath());
+    if (src.empty()) {
+      throw new Exception("加载图片失败！");
+    }
+    Mat dst = src.clone();
+    float[] kernel = {-0.5F,-1,-0.5F,-1,7,-1,-0.5F,-1,-0.5F};
+    Mat kernelMat = new Mat(3, 3, CvType.CV_32FC1);
+    kernelMat.put(0, 0, kernel);
+    Imgproc.filter2D(src, dst, -1, kernelMat);
+    String outputFilePath = PathUtil.outputTempFilePath(file, "sharpening");
+    Imgcodecs.imwrite(outputFilePath,dst);
+    return outputFilePath;
+  }
 
 
 
@@ -261,7 +279,7 @@ public class ImageEnhancement {
     Mat dst = src.clone();
     Imgproc.GaussianBlur(src,dst,new Size(0,0),31,0);
 
-    String outputFilePath = PathUtil.outputTempFilePath(file, "gaussianBlur31");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "gaussianBlur");
     Imgcodecs.imwrite(outputFilePath,dst);
 
     return outputFilePath;
@@ -276,7 +294,37 @@ public class ImageEnhancement {
     Mat dst = src.clone();
     Imgproc.GaussianBlur(src,dst,new Size(0,0),sigmaX,0);
 
-    String outputFilePath = PathUtil.outputTempFilePath(file, "gaussianBlur31");
+    String outputFilePath = PathUtil.outputTempFilePath(file, "gaussianBlur");
+    Imgcodecs.imwrite(outputFilePath,dst);
+
+    return outputFilePath;
+  }
+
+  public static String blur(File file) throws Exception {
+    Mat src = Imgcodecs.imread(file.getAbsolutePath());
+
+    if (src.empty()) {
+      throw new Exception("加载图片失败！");
+    }
+    Mat dst = src.clone();
+    Imgproc.blur(src,dst,new Size(15,15));
+
+    String outputFilePath = PathUtil.outputTempFilePath(file, "blur");
+    Imgcodecs.imwrite(outputFilePath,dst);
+
+    return outputFilePath;
+  }
+
+  public static String blur(File file,double width) throws Exception {
+    Mat src = Imgcodecs.imread(file.getAbsolutePath());
+
+    if (src.empty()) {
+      throw new Exception("加载图片失败！");
+    }
+    Mat dst = src.clone();
+    Imgproc.blur(src,dst,new Size(width,width));
+
+    String outputFilePath = PathUtil.outputTempFilePath(file, "blur");
     Imgcodecs.imwrite(outputFilePath,dst);
 
     return outputFilePath;

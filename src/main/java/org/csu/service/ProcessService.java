@@ -309,4 +309,38 @@ public class ProcessService {
     }.run();
   }
 
+  public void sharping(){
+    new Runnable() {
+      @Override
+      public void run() {
+        controller.addNewLog(" 锐化开始---");
+        try {
+          outputPath = ImageEnhancement.sharpening(file);
+          controller.addNewLog(" 锐化结束");
+          controller.showOutputImg(new File(outputPath));
+        }
+        catch (Exception e) {
+          controller.addNewLog(e.getMessage());
+        }
+      }
+    }.run();
+  }
+
+  public void detectConers(){
+    new Runnable() {
+      @Override
+      public void run() {
+        controller.addNewLog(" 角点检测开始---");
+        try {
+          outputPath = EdgeDetection.detectConers(file);
+          controller.addNewLog(" 角点检测结束");
+          controller.showOutputImg(new File(outputPath));
+        }
+        catch (Exception e) {
+          controller.addNewLog(e.getMessage());
+        }
+      }
+    }.run();
+  }
+
 }

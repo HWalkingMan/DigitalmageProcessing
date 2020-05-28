@@ -53,6 +53,11 @@ public class ImageEnhancementTest {
   }
 
   @Test
+  public void sharpening() throws Exception {
+    ImageEnhancement.sharpening(new File("src/main/resources/inputImg/lena.jpg"));
+  }
+
+  @Test
   public void gaussianBlur() throws Exception {
     ImageEnhancement.gaussianBlur(new File("src/main/resources/inputImg/duck.jpg"));
   }
@@ -60,5 +65,10 @@ public class ImageEnhancementTest {
   @Test
   public void medianFiltering() throws Exception {
     ImageEnhancement.medianFiltering(new File("src/main/resources/inputImg/duck.jpg"));
+  }
+
+  @Test
+  public void blur() throws Exception {
+    ImageEnhancement.blur(new File("src/main/resources/inputImg/duck.jpg"),15);
   }
 }

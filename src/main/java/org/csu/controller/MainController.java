@@ -74,6 +74,8 @@ public class MainController implements Initializable {
   public Button btn_sobel;
   public Label la_para5v;
   public Label la_para6v;
+  public Button btn_sharping;
+  public Button btn_detectConers;
 
   private File file;
 
@@ -106,6 +108,7 @@ public class MainController implements Initializable {
         la_para6v.setText(String.format("%.1f", newValue));
       }
     });
+
   }
 
   public void btn_openClick(ActionEvent actionEvent) {
@@ -208,6 +211,8 @@ public class MainController implements Initializable {
     btn_gaussianBlur.setDisable(false);
     btn_canny.setDisable(false);
     btn_sobel.setDisable(false);
+    btn_sharping.setDisable(false);
+    btn_detectConers.setDisable(false);
   }
 
   private String type="";
@@ -440,6 +445,16 @@ public class MainController implements Initializable {
   public void btn_sobelClick(ActionEvent actionEvent) {
     resetParas();
     service.sobel();
+  }
+
+  public void btn_sharpingClick(ActionEvent actionEvent) {
+    resetParas();
+    service.sharping();
+  }
+
+  public void btn_detectConersClick(ActionEvent actionEvent) {
+    resetParas();
+    service.detectConers();
   }
 
   public void btn_clearClick(ActionEvent actionEvent) {
