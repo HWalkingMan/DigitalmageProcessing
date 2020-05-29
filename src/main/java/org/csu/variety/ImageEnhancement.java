@@ -3,6 +3,7 @@ package org.csu.variety;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import org.csu.utils.PathUtil;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -329,6 +330,38 @@ public class ImageEnhancement {
 
     return outputFilePath;
   }
+
+  public static String saltNoise(File file) throws Exception {
+    Mat src = Imgcodecs.imread(file.getAbsolutePath());
+
+    if (src.empty()) {
+      throw new Exception("加载图片失败！");
+    }
+    Mat dst = src.clone();
+    for (int k = 0; k < 3000; k++)
+    {
+      Random rondom=new Random();
+      //随机选取行列值
+      int i = rondom.nextInt(src.height());
+      int j = rondom.nextInt(src.width());
+      if (dst.channels() == 1)
+      {
+        dst.put(j, i,new int[]{255});
+      }
+      else
+      {
+        dst.put(j,i,new int[]{255,255,255});
+      }
+
+    }
+
+
+    String outputFilePath = PathUtil.outputTempFilePath(file, "saltNoise");
+    Imgcodecs.imwrite(outputFilePath,dst);
+
+    return outputFilePath;
+  }
+
 
 
 

@@ -71,4 +71,9 @@ public class ImageEnhancementTest {
   public void blur() throws Exception {
     ImageEnhancement.blur(new File("src/main/resources/inputImg/duck.jpg"),15);
   }
+
+  @Test
+  public void saltNoise() throws Exception {
+    ImageEnhancement.saltNoise(new File("src/main/resources/inputImg/duck.jpg"));
+  }
 }
